@@ -1,8 +1,8 @@
-navSelected();
-contentRemove(".exercise");
-contentRemove(".x-sm-exercise");
+selectedNav();
+removeContent(".exercise");
+removeContent(".x-sm-exercise");
 
-function contentRemove(className) {
+function removeContent(className) {
   const contentList = document.querySelectorAll(className);
 
   for (let content of contentList) {
@@ -28,17 +28,10 @@ function contentRemove(className) {
   }
 }
 
-function navSelected() {
-  const url = document.URL;
-
-  if (url.includes("upper")) {
-    const upperNav = document.querySelector("#upper");
-    upperNav.style.backgroundColor = "rgb(233, 233, 237)";
-  } else if (url.includes("lower")) {
-    const upperNav = document.querySelector("#lower");
-    upperNav.style.backgroundColor = "rgb(233, 233, 237)";
-  } else {
-    const upperNav = document.querySelector("#core");
-    upperNav.style.backgroundColor = "rgb(233, 233, 237)";
-  }
+function selectedNav() {
+  let url = document.URL;
+  url = url.slice(-11);
+  url = url.slice(url.indexOf("/") + 1, url.indexOf("."));
+  const upperNav = document.querySelector(`#${url}`);
+  upperNav.style.backgroundColor = "rgb(233, 233, 237)";
 }
