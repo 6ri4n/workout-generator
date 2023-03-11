@@ -43,6 +43,7 @@ a:hover {
 .x-sm-exercise:hover,
 .exercise:hover {
   background-color: rgb(233, 233, 237);
+  cursor: pointer;
 }
 
 @media (max-width: 768px) {
