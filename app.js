@@ -18,7 +18,7 @@ function removeContent(className) {
 
     content.addEventListener("click", (e) => {
       let classValue = e.target.attributes.class.value;
-      classValue = classValue.slice(0, classValue.indexOf("exercise") - 1);
+      classValue = classValue.slice(0, classValue.indexOf(" "));
 
       const rowContent = document.querySelectorAll(`.${classValue}`);
       for (let col of rowContent) {
