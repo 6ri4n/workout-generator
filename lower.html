@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@500&display=swap"
+      rel="stylesheet"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+      integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+      crossorigin="anonymous"
+    />
+
+    <link rel="stylesheet" href="style.css" />
+
+    <title>Workout Generator</title>
+  </head>
+  <body>
+    <div id="body-container">
+      <div id="workout-container" class="container">
+        <h1 id="heading" class="container text-center m-0">
+          Workout Generator
+        </h1>
+        <nav class="navbar navbar-expand-sm py-3">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a id="upper" href="upper.html" class="nav-link px-5">upper</a>
+            </li>
+            <li class="nav-item">
+              <a id="lower" href="lower.html" class="nav-link px-5">lower</a>
+            </li>
+            <li class="nav-item">
+              <a id="core" href="core.html" class="nav-link px-5">core</a>
+            </li>
+          </ul>
+        </nav>
+
+        <section class="container-fluid">
+          <div class="row align-items-center content">
+            <div class="col-title col-4 text-center pt-3">Exercises</div>
+            <div class="col-title col-4 text-center pt-3">Reps</div>
+            <div class="col-title col-4 text-center pt-3">Sets</div>
+        </section>
+
+        <button id="generate" class="px-5 py-2 mt-3">Generate</button>
+      </div>
+    </div>
+
+    <script src="app.js"></script>
+  </body>
+</html>
