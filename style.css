@@ -13,13 +13,15 @@ a {
 }
 
 .buttons {
-  width: 20%;
+  display: block;
 }
 
 #generate,
 #clear {
   background: rgb(233, 233, 237);
   cursor: pointer;
+  display: flex;
+  justify-content: center;
 }
 
 #body-container {
@@ -51,6 +53,10 @@ a:hover {
 }
 
 @media (max-width: 768px) {
+  .buttons {
+    width: 80%;
+  }
+
   .exercise,
   .rep,
   .set {
@@ -82,6 +88,10 @@ a:hover {
 }
 
 @media (min-width: 768px) {
+  .buttons {
+    width: 35%;
+  }
+
   .exercise,
   .rep,
   .set {
