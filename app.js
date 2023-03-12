@@ -18,15 +18,16 @@ function generateButton() {
       let startIndex = (contentListLength - 4) / 4 + 1;
 
       for (let i = startIndex; i <= 5; i++) {
-        generateExercise(i, workoutSelection, workoutData);
-        removeContent(".exercise");
-        removeContent(".x-sm-exercise");
+        generateExercise(workoutSelection, workoutData);
       }
     }
+
+    removeContent(".exercise");
+    removeContent(".x-sm-exercise");
   });
 }
 
-function generateExercise(contentIndex, workoutSelection, workoutData) {
+function generateExercise(workoutSelection, workoutData) {
   const workoutListLength = Object.keys(workoutData[workoutSelection]).length;
   let randomIndex = Math.floor(Math.random() * workoutListLength);
   let randomExercise = workoutData[workoutSelection][randomIndex];
@@ -36,6 +37,7 @@ function generateExercise(contentIndex, workoutSelection, workoutData) {
     randomExercise = workoutData[workoutSelection][randomIndex];
   }
 
+  const contentIndex = getContentIndex();
   const xSmExercise = document.createElement("div");
   const exercise = document.createElement("div");
   const rep = document.createElement("div");
@@ -89,6 +91,27 @@ function isExerciseDuplicate(exercise) {
   return false;
 }
 
+function getContentIndex() {
+  const exerciseList = document.querySelectorAll(".exercise");
+  const indexArray = [1, 2, 3, 4, 5];
+
+  for (let i = 0; i < exerciseList.length; i++) {
+    const exerciseClassValue = exerciseList[i].classList.value;
+    const exerciseContentIndex = parseInt(
+      exerciseClassValue.slice(0, exerciseClassValue.indexOf(" ")).slice(-1)
+    );
+
+    for (let j = 0; j < indexArray.length; j++) {
+      if (exerciseContentIndex === indexArray[j]) {
+        indexArray.splice(j, 1);
+        break;
+      }
+    }
+  }
+
+  return indexArray[0];
+}
+
 function removeContent(className) {
   const contentList = document.querySelectorAll(className);
 
@@ -111,6 +134,8 @@ function removeContent(className) {
       for (let row of rowContentList) {
         row.remove();
       }
+
+      // reorderContentList();
     });
   }
 }
