@@ -1,7 +1,5 @@
 selectedNav();
 generateButton();
-removeContent(".exercise");
-removeContent(".x-sm-exercise");
 
 function generateButton() {
   const generate = document.querySelector("#generate");
@@ -82,13 +80,13 @@ function generateExercise(contentIndex, workoutSelection, workoutData) {
 }
 
 function isExerciseDuplicate(exercise) {
-  const content = document.querySelector(".x-sm-exercise");
-  if (content === null) {
-    return false;
-  } else {
-    console.log(content.innerText.includes(exercise));
-    return content.innerText.includes(exercise);
+  const contentList = document.querySelectorAll(".exercise");
+  for (let row of contentList) {
+    if (row.innerText.includes(exercise)) {
+      return true;
+    }
   }
+  return false;
 }
 
 function removeContent(className) {
