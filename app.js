@@ -1,6 +1,95 @@
 selectedNav();
+generateButton();
 removeContent(".exercise");
 removeContent(".x-sm-exercise");
+
+function generateButton() {
+  const generate = document.querySelector("#generate");
+  generate.addEventListener("click", () => {
+    let workoutSelection = document.URL;
+    workoutSelection = workoutSelection.slice(-11);
+    workoutSelection = workoutSelection.slice(
+      workoutSelection.indexOf("/") + 1,
+      workoutSelection.indexOf(".")
+    );
+    const contentListLength =
+      document.querySelectorAll(".content-list div").length;
+
+    if ((contentListLength - 4) / 4 !== 5) {
+      const workoutData = getWorkoutData();
+      let startIndex = (contentListLength - 4) / 4 + 1;
+
+      for (let i = startIndex; i <= 5; i++) {
+        generateExercise(i, workoutSelection, workoutData);
+        removeContent(".exercise");
+        removeContent(".x-sm-exercise");
+      }
+    }
+  });
+}
+
+function generateExercise(contentIndex, workoutSelection, workoutData) {
+  const workoutListLength = Object.keys(workoutData[workoutSelection]).length;
+  let randomIndex = Math.floor(Math.random() * workoutListLength);
+  let randomExercise = workoutData[workoutSelection][randomIndex];
+
+  while (isExerciseDuplicate(randomExercise.name)) {
+    randomIndex = Math.floor(Math.random() * workoutListLength);
+    randomExercise = workoutData[workoutSelection][randomIndex];
+  }
+
+  const xSmExercise = document.createElement("div");
+  const exercise = document.createElement("div");
+  const rep = document.createElement("div");
+  const set = document.createElement("div");
+
+  xSmExercise.innerText = `${randomExercise.name}: ${randomExercise.reps} reps - ${randomExercise.sets} sets`;
+  exercise.innerText = randomExercise.name;
+  rep.innerText = randomExercise.reps;
+  set.innerText = randomExercise.sets;
+
+  xSmExercise.classList.add(
+    `content-${contentIndex}`,
+    "x-sm-exercise",
+    "col-12",
+    "text-center",
+    "py-3"
+  );
+  exercise.classList.add(
+    `content-${contentIndex}`,
+    "exercise",
+    "col-4",
+    "text-center",
+    "py-3"
+  );
+  rep.classList.add(
+    `content-${contentIndex}`,
+    "rep",
+    "col-4",
+    "text-center",
+    "py-3"
+  );
+  set.classList.add(
+    `content-${contentIndex}`,
+    "set",
+    "col-4",
+    "text-center",
+    "py-3"
+  );
+
+  const contentContainer = document.querySelector(".content-list");
+  contentContainer.append(xSmExercise, exercise, rep, set);
+}
+
+function isExerciseDuplicate(exercise) {
+  const content = document.querySelector(".x-sm-exercise");
+  if (content === null) {
+    return false;
+  } else {
+    console.log(content.innerText.includes(exercise));
+    return content.innerText.includes(exercise);
+  }
+}
 
 function removeContent(className) {
   const contentList = document.querySelectorAll(className);
@@ -17,21 +106,188 @@ function removeContent(className) {
     });
 
     content.addEventListener("click", (e) => {
-      let classValue = e.target.attributes.class.value;
-      classValue = classValue.slice(0, classValue.indexOf(" "));
+      let rowContent = e.target.attributes.class.value;
+      rowContent = rowContent.slice(0, rowContent.indexOf(" "));
 
-      const rowContent = document.querySelectorAll(`.${classValue}`);
-      for (let col of rowContent) {
-        col.remove();
+      const rowContentList = document.querySelectorAll(`.${rowContent}`);
+      for (let row of rowContentList) {
+        row.remove();
       }
     });
   }
 }
 
 function selectedNav() {
-  let url = document.URL;
-  url = url.slice(-11);
-  url = url.slice(url.indexOf("/") + 1, url.indexOf("."));
-  const upperNav = document.querySelector(`#${url}`);
+  let parsedUrl = document.URL;
+  parsedUrl = parsedUrl.slice(-11);
+  parsedUrl = parsedUrl.slice(
+    parsedUrl.indexOf("/") + 1,
+    parsedUrl.indexOf(".")
+  );
+
+  const upperNav = document.querySelector(`#${parsedUrl}`);
   upperNav.style.backgroundColor = "rgb(233, 233, 237)";
+}
+
+function getWorkoutData() {
+  const data = {
+    upper: {
+      0: {
+        name: "text1",
+        reps: "6-12",
+        sets: "2-4",
+      },
+      1: {
+        name: "text2",
+        reps: "6-12",
+        sets: "2-4",
+      },
+      2: {
+        name: "text3",
+        reps: "6-12",
+        sets: "2-4",
+      },
+      3: {
+        name: "text4",
+        reps: "6-12",
+        sets: "2-4",
+      },
+      4: {
+        name: "text5",
+        reps: "6-12",
+        sets: "2-4",
+      },
+      5: {
+        name: "text6",
+        reps: "6-12",
+        sets: "2-4",
+      },
+      6: {
+        name: "text7",
+        reps: "6-12",
+        sets: "2-4",
+      },
+      7: {
+        name: "text8",
+        reps: "6-12",
+        sets: "2-4",
+      },
+      8: {
+        name: "text9",
+        reps: "6-12",
+        sets: "2-4",
+      },
+      9: {
+        name: "text10",
+        reps: "6-12",
+        sets: "2-4",
+      },
+    },
+    lower: {
+      0: {
+        name: "text1",
+        reps: "6-12",
+        sets: "2-4",
+      },
+      1: {
+        name: "text2",
+        reps: "6-12",
+        sets: "2-4",
+      },
+      2: {
+        name: "text3",
+        reps: "6-12",
+        sets: "2-4",
+      },
+      3: {
+        name: "text4",
+        reps: "6-12",
+        sets: "2-4",
+      },
+      4: {
+        name: "text5",
+        reps: "6-12",
+        sets: "2-4",
+      },
+      5: {
+        name: "text6",
+        reps: "6-12",
+        sets: "2-4",
+      },
+      6: {
+        name: "text7",
+        reps: "6-12",
+        sets: "2-4",
+      },
+      7: {
+        name: "text8",
+        reps: "6-12",
+        sets: "2-4",
+      },
+      8: {
+        name: "text9",
+        reps: "6-12",
+        sets: "2-4",
+      },
+      9: {
+        name: "text10",
+        reps: "6-12",
+        sets: "2-4",
+      },
+    },
+    core: {
+      0: {
+        name: "text1",
+        reps: "6-12",
+        sets: "2-4",
+      },
+      1: {
+        name: "text2",
+        reps: "6-12",
+        sets: "2-4",
+      },
+      2: {
+        name: "text3",
+        reps: "6-12",
+        sets: "2-4",
+      },
+      3: {
+        name: "text4",
+        reps: "6-12",
+        sets: "2-4",
+      },
+      4: {
+        name: "text5",
+        reps: "6-12",
+        sets: "2-4",
+      },
+      5: {
+        name: "text6",
+        reps: "6-12",
+        sets: "2-4",
+      },
+      6: {
+        name: "text7",
+        reps: "6-12",
+        sets: "2-4",
+      },
+      7: {
+        name: "text8",
+        reps: "6-12",
+        sets: "2-4",
+      },
+      8: {
+        name: "text9",
+        reps: "6-12",
+        sets: "2-4",
+      },
+      9: {
+        name: "text10",
+        reps: "6-12",
+        sets: "2-4",
+      },
+    },
+  };
+
+  return data;
 }

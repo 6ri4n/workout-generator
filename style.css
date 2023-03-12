@@ -12,9 +12,8 @@ a {
   color: black;
 }
 
-button {
+#generate {
   background: rgb(233, 233, 237);
-  border: none;
   cursor: pointer;
 }
 
