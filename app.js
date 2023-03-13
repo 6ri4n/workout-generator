@@ -1,4 +1,5 @@
-selectedNav();
+defaultSelected();
+difficultyButton();
 generateButton();
 clearButton();
 
@@ -40,7 +41,27 @@ function generateButton() {
   });
 }
 
+function difficultyButton() {
+  const difficulty = document.querySelectorAll("#difficulty span");
+  for (let button of difficulty) {
+    button.addEventListener("click", () => {
+      for (let b of difficulty) {
+        b.style.backgroundColor = "";
+      }
+
+      if (button.className === "beginner") {
+        button.style.backgroundColor = "#9dc08b";
+      } else if (button.className === "normal") {
+        button.style.backgroundColor = "#ffe9a0";
+      } else {
+        button.style.backgroundColor = "#ff7d7d";
+      }
+    });
+  }
+}
+
 function generateExercise(workoutSelection, workoutData) {
+  const difficultySelected = getDifficulty();
   const workoutListLength = Object.keys(workoutData[workoutSelection]).length;
   let randomIndex = Math.floor(Math.random() * workoutListLength);
   let randomExercise = workoutData[workoutSelection][randomIndex];
@@ -56,10 +77,10 @@ function generateExercise(workoutSelection, workoutData) {
   const rep = document.createElement("div");
   const set = document.createElement("div");
 
-  xSmExercise.innerText = `${randomExercise.name}: ${randomExercise.reps} reps - ${randomExercise.sets} sets`;
+  xSmExercise.innerText = `${randomExercise.name}: ${randomExercise.difficulty[difficultySelected].reps} reps - ${randomExercise.difficulty[difficultySelected].sets} sets`;
   exercise.innerText = randomExercise.name;
-  rep.innerText = randomExercise.reps;
-  set.innerText = randomExercise.sets;
+  rep.innerText = randomExercise.difficulty[difficultySelected].reps;
+  set.innerText = randomExercise.difficulty[difficultySelected].sets;
 
   xSmExercise.classList.add(
     `content-${contentIndex}`,
@@ -153,7 +174,7 @@ function removeContent(className) {
   }
 }
 
-function selectedNav() {
+function defaultSelected() {
   let parsedUrl = document.URL;
   parsedUrl = parsedUrl.slice(-11);
   parsedUrl = parsedUrl.slice(
@@ -161,166 +182,541 @@ function selectedNav() {
     parsedUrl.indexOf(".")
   );
 
-  const upperNav = document.querySelector(`#${parsedUrl}`);
-  upperNav.style.backgroundColor = "rgb(233, 233, 237)";
+  const defaultNav = document.querySelector(`#${parsedUrl}`);
+  defaultNav.style.backgroundColor = "rgb(233, 233, 237)";
+
+  const defaultDifficulty = document.querySelector("#difficulty span");
+  defaultDifficulty.style.backgroundColor = "#9dc08b";
+}
+
+function getDifficulty() {
+  const difficulty = document.querySelectorAll("#difficulty span");
+
+  for (let button of difficulty) {
+    if (button.style.backgroundColor !== "") {
+      return button.className;
+    }
+  }
+
+  return "beginner";
 }
 
 function getWorkoutData() {
   const data = {
     upper: {
       0: {
-        name: "text1",
-        reps: "6-12",
-        sets: "2-4",
+        name: "upper 1",
+        difficulty: {
+          beginner: {
+            reps: "4-6",
+            sets: "2",
+          },
+          normal: {
+            reps: "6-12",
+            sets: "3-4",
+          },
+          advanced: {
+            reps: "16-20",
+            sets: "4-5",
+          },
+        },
       },
       1: {
-        name: "text2",
-        reps: "6-12",
-        sets: "2-4",
+        name: "upper 2",
+        difficulty: {
+          beginner: {
+            reps: "4-6",
+            sets: "2",
+          },
+          normal: {
+            reps: "6-12",
+            sets: "3-4",
+          },
+          advanced: {
+            reps: "16-20",
+            sets: "4-5",
+          },
+        },
       },
       2: {
-        name: "text3",
-        reps: "6-12",
-        sets: "2-4",
+        name: "upper 3",
+        difficulty: {
+          beginner: {
+            reps: "4-6",
+            sets: "2",
+          },
+          normal: {
+            reps: "6-12",
+            sets: "3-4",
+          },
+          advanced: {
+            reps: "16-20",
+            sets: "4-5",
+          },
+        },
       },
       3: {
-        name: "text4",
-        reps: "6-12",
-        sets: "2-4",
+        name: "upper 4",
+        difficulty: {
+          beginner: {
+            reps: "4-6",
+            sets: "2",
+          },
+          normal: {
+            reps: "6-12",
+            sets: "3-4",
+          },
+          advanced: {
+            reps: "16-20",
+            sets: "4-5",
+          },
+        },
       },
       4: {
-        name: "text5",
-        reps: "6-12",
-        sets: "2-4",
+        name: "upper 5",
+        difficulty: {
+          beginner: {
+            reps: "4-6",
+            sets: "2",
+          },
+          normal: {
+            reps: "6-12",
+            sets: "3-4",
+          },
+          advanced: {
+            reps: "16-20",
+            sets: "4-5",
+          },
+        },
       },
       5: {
-        name: "text6",
-        reps: "6-12",
-        sets: "2-4",
+        name: "upper 6",
+        difficulty: {
+          beginner: {
+            reps: "4-6",
+            sets: "2",
+          },
+          normal: {
+            reps: "6-12",
+            sets: "3-4",
+          },
+          advanced: {
+            reps: "16-20",
+            sets: "4-5",
+          },
+        },
       },
       6: {
-        name: "text7",
-        reps: "6-12",
-        sets: "2-4",
+        name: "upper 7",
+        difficulty: {
+          beginner: {
+            reps: "4-6",
+            sets: "2",
+          },
+          normal: {
+            reps: "6-12",
+            sets: "3-4",
+          },
+          advanced: {
+            reps: "16-20",
+            sets: "4-5",
+          },
+        },
       },
       7: {
-        name: "text8",
-        reps: "6-12",
-        sets: "2-4",
+        name: "upper 8",
+        difficulty: {
+          beginner: {
+            reps: "4-6",
+            sets: "2",
+          },
+          normal: {
+            reps: "6-12",
+            sets: "3-4",
+          },
+          advanced: {
+            reps: "16-20",
+            sets: "4-5",
+          },
+        },
       },
       8: {
-        name: "text9",
-        reps: "6-12",
-        sets: "2-4",
+        name: "upper 9",
+        difficulty: {
+          beginner: {
+            reps: "4-6",
+            sets: "2",
+          },
+          normal: {
+            reps: "6-12",
+            sets: "3-4",
+          },
+          advanced: {
+            reps: "16-20",
+            sets: "4-5",
+          },
+        },
       },
       9: {
-        name: "text10",
-        reps: "6-12",
-        sets: "2-4",
+        name: "upper 10",
+        difficulty: {
+          beginner: {
+            reps: "4-6",
+            sets: "2",
+          },
+          normal: {
+            reps: "6-12",
+            sets: "3-4",
+          },
+          advanced: {
+            reps: "16-20",
+            sets: "4-5",
+          },
+        },
       },
     },
     lower: {
       0: {
-        name: "text1",
-        reps: "6-12",
-        sets: "2-4",
+        name: "lower 1",
+        difficulty: {
+          beginner: {
+            reps: "4-6",
+            sets: "2",
+          },
+          normal: {
+            reps: "6-12",
+            sets: "3-4",
+          },
+          advanced: {
+            reps: "16-20",
+            sets: "4-5",
+          },
+        },
       },
       1: {
-        name: "text2",
-        reps: "6-12",
-        sets: "2-4",
+        name: "lower 2",
+        difficulty: {
+          beginner: {
+            reps: "4-6",
+            sets: "2",
+          },
+          normal: {
+            reps: "6-12",
+            sets: "3-4",
+          },
+          advanced: {
+            reps: "16-20",
+            sets: "4-5",
+          },
+        },
       },
       2: {
-        name: "text3",
-        reps: "6-12",
-        sets: "2-4",
+        name: "lower 3",
+        difficulty: {
+          beginner: {
+            reps: "4-6",
+            sets: "2",
+          },
+          normal: {
+            reps: "6-12",
+            sets: "3-4",
+          },
+          advanced: {
+            reps: "16-20",
+            sets: "4-5",
+          },
+        },
       },
       3: {
-        name: "text4",
-        reps: "6-12",
-        sets: "2-4",
+        name: "lower 4",
+        difficulty: {
+          beginner: {
+            reps: "4-6",
+            sets: "2",
+          },
+          normal: {
+            reps: "6-12",
+            sets: "3-4",
+          },
+          advanced: {
+            reps: "16-20",
+            sets: "4-5",
+          },
+        },
       },
       4: {
-        name: "text5",
-        reps: "6-12",
-        sets: "2-4",
+        name: "lower 5",
+        difficulty: {
+          beginner: {
+            reps: "4-6",
+            sets: "2",
+          },
+          normal: {
+            reps: "6-12",
+            sets: "3-4",
+          },
+          advanced: {
+            reps: "16-20",
+            sets: "4-5",
+          },
+        },
       },
       5: {
-        name: "text6",
-        reps: "6-12",
-        sets: "2-4",
+        name: "lower 6",
+        difficulty: {
+          beginner: {
+            reps: "4-6",
+            sets: "2",
+          },
+          normal: {
+            reps: "6-12",
+            sets: "3-4",
+          },
+          advanced: {
+            reps: "16-20",
+            sets: "4-5",
+          },
+        },
       },
       6: {
-        name: "text7",
-        reps: "6-12",
-        sets: "2-4",
+        name: "lower 7",
+        difficulty: {
+          beginner: {
+            reps: "4-6",
+            sets: "2",
+          },
+          normal: {
+            reps: "6-12",
+            sets: "3-4",
+          },
+          advanced: {
+            reps: "16-20",
+            sets: "4-5",
+          },
+        },
       },
       7: {
-        name: "text8",
-        reps: "6-12",
-        sets: "2-4",
+        name: "lower 8",
+        difficulty: {
+          beginner: {
+            reps: "4-6",
+            sets: "2",
+          },
+          normal: {
+            reps: "6-12",
+            sets: "3-4",
+          },
+          advanced: {
+            reps: "16-20",
+            sets: "4-5",
+          },
+        },
       },
       8: {
-        name: "text9",
-        reps: "6-12",
-        sets: "2-4",
+        name: "lower 9",
+        difficulty: {
+          beginner: {
+            reps: "4-6",
+            sets: "2",
+          },
+          normal: {
+            reps: "6-12",
+            sets: "3-4",
+          },
+          advanced: {
+            reps: "16-20",
+            sets: "4-5",
+          },
+        },
       },
       9: {
-        name: "text10",
-        reps: "6-12",
-        sets: "2-4",
+        name: "lower 10",
+        difficulty: {
+          beginner: {
+            reps: "4-6",
+            sets: "2",
+          },
+          normal: {
+            reps: "6-12",
+            sets: "3-4",
+          },
+          advanced: {
+            reps: "16-20",
+            sets: "4-5",
+          },
+        },
       },
     },
     core: {
       0: {
-        name: "text1",
-        reps: "6-12",
-        sets: "2-4",
+        name: "core 1",
+        difficulty: {
+          beginner: {
+            reps: "4-6",
+            sets: "2",
+          },
+          normal: {
+            reps: "6-12",
+            sets: "3-4",
+          },
+          advanced: {
+            reps: "16-20",
+            sets: "4-5",
+          },
+        },
       },
       1: {
-        name: "text2",
-        reps: "6-12",
-        sets: "2-4",
+        name: "core 2",
+        difficulty: {
+          beginner: {
+            reps: "4-6",
+            sets: "2",
+          },
+          normal: {
+            reps: "6-12",
+            sets: "3-4",
+          },
+          advanced: {
+            reps: "16-20",
+            sets: "4-5",
+          },
+        },
       },
       2: {
-        name: "text3",
-        reps: "6-12",
-        sets: "2-4",
+        name: "core 3",
+        difficulty: {
+          beginner: {
+            reps: "4-6",
+            sets: "2",
+          },
+          normal: {
+            reps: "6-12",
+            sets: "3-4",
+          },
+          advanced: {
+            reps: "16-20",
+            sets: "4-5",
+          },
+        },
       },
       3: {
-        name: "text4",
-        reps: "6-12",
-        sets: "2-4",
+        name: "core 4",
+        difficulty: {
+          beginner: {
+            reps: "4-6",
+            sets: "2",
+          },
+          normal: {
+            reps: "6-12",
+            sets: "3-4",
+          },
+          advanced: {
+            reps: "16-20",
+            sets: "4-5",
+          },
+        },
       },
       4: {
-        name: "text5",
-        reps: "6-12",
-        sets: "2-4",
+        name: "core 5",
+        difficulty: {
+          beginner: {
+            reps: "4-6",
+            sets: "2",
+          },
+          normal: {
+            reps: "6-12",
+            sets: "3-4",
+          },
+          advanced: {
+            reps: "16-20",
+            sets: "4-5",
+          },
+        },
       },
       5: {
-        name: "text6",
-        reps: "6-12",
-        sets: "2-4",
+        name: "core 6",
+        difficulty: {
+          beginner: {
+            reps: "4-6",
+            sets: "2",
+          },
+          normal: {
+            reps: "6-12",
+            sets: "3-4",
+          },
+          advanced: {
+            reps: "16-20",
+            sets: "4-5",
+          },
+        },
       },
       6: {
-        name: "text7",
-        reps: "6-12",
-        sets: "2-4",
+        name: "core 7",
+        difficulty: {
+          beginner: {
+            reps: "4-6",
+            sets: "2",
+          },
+          normal: {
+            reps: "6-12",
+            sets: "3-4",
+          },
+          advanced: {
+            reps: "16-20",
+            sets: "4-5",
+          },
+        },
       },
       7: {
-        name: "text8",
-        reps: "6-12",
-        sets: "2-4",
+        name: "core 8",
+        difficulty: {
+          beginner: {
+            reps: "4-6",
+            sets: "2",
+          },
+          normal: {
+            reps: "6-12",
+            sets: "3-4",
+          },
+          advanced: {
+            reps: "16-20",
+            sets: "4-5",
+          },
+        },
       },
       8: {
-        name: "text9",
-        reps: "6-12",
-        sets: "2-4",
+        name: "core 9",
+        difficulty: {
+          beginner: {
+            reps: "4-6",
+            sets: "2",
+          },
+          normal: {
+            reps: "6-12",
+            sets: "3-4",
+          },
+          advanced: {
+            reps: "16-20",
+            sets: "4-5",
+          },
+        },
       },
       9: {
-        name: "text10",
-        reps: "6-12",
-        sets: "2-4",
+        name: "core 10",
+        difficulty: {
+          beginner: {
+            reps: "4-6",
+            sets: "2",
+          },
+          normal: {
+            reps: "6-12",
+            sets: "3-4",
+          },
+          advanced: {
+            reps: "16-20",
+            sets: "4-5",
+          },
+        },
       },
     },
   };
