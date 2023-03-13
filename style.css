@@ -18,6 +18,10 @@ a {
   cursor: pointer;
 }
 
+#difficulty {
+  display: flex;
+}
+
 #nav-bar {
   display: flex;
 }
@@ -108,6 +112,13 @@ a:hover {
     font-size: 0.95rem;
   }
 
+  .beginner,
+  .normal,
+  .advanced {
+    font-size: 0.9rem;
+    padding: 10px 12px;
+  }
+
   #heading {
     font-size: 1.5rem;
   }
@@ -116,11 +127,8 @@ a:hover {
     width: 65%;
   }
 
-  .beginner,
-  .normal,
-  .advanced {
-    font-size: 0.9rem;
-    padding: 10px 12px;
+  #nav-bar a {
+    padding: 10px 30px;
   }
 }
 
