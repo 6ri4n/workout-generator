@@ -7,7 +7,6 @@ function clearButton() {
   const clear = document.querySelector("#clear");
   clear.addEventListener("click", () => {
     const contentList = document.querySelectorAll(".content-list div");
-
     for (let i = 4; i < contentList.length; i++) {
       contentList[i].remove();
     }
@@ -168,8 +167,6 @@ function removeContent(className) {
       for (let row of rowContentList) {
         row.remove();
       }
-
-      // reorderContentList();
     });
   }
 }
