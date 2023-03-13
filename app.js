@@ -27,11 +27,12 @@ function generateButton() {
 
     if ((contentListLength - 4) / 4 !== 5) {
       const workoutData = getWorkoutData();
-      let startIndex = (contentListLength - 4) / 4 + 1;
+      generateExercise(workoutSelection, workoutData);
+      // let startIndex = (contentListLength - 4) / 4 + 1;
 
-      for (let i = startIndex; i <= 5; i++) {
-        generateExercise(workoutSelection, workoutData);
-      }
+      // for (let i = startIndex; i <= 5; i++) {
+      //   generateExercise(workoutSelection, workoutData);
+      // }
     }
 
     removeContent(".exercise");
